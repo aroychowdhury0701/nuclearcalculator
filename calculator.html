@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator - Warning Edition</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #1a1a1a; margin: 0; }
+        .calculator { background: #2c3e50; padding: 20px; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.7); width: 340px; }
+        #display { width: 100%; height: 60px; font-size: 1.8rem; text-align: right; margin-bottom: 15px; padding: 10px; box-sizing: border-box; border: none; background: #dcdde1; border-radius: 5px; color: #2f3640; }
+        .buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        button { padding: 15px; font-size: 1rem; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; background: #7f8c8d; color: white; font-weight: bold; }
+        button:hover { background: #95a5a6; transform: translateY(-2px); }
+        .operator { background: #e67e22; }
+        .equals { background: #27ae60; grid-column: span 2; }
+        .clear { background: #c0392b; }
+        .sci { background: #2980b9; font-size: 0.85rem; }
+        .paren { background: #8e44ad; }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <input type="text" id="display" placeholder="0" disabled>
+    <div class="buttons">
+        <button class="paren" onclick="push('(')">(</button>
+        <button class="paren" onclick="push(')')">)</button>
+        <button class="sci" onclick="push('Math.pow(')">xⁿ</button>
+        <button class="clear" onclick="clearDisplay()">AC</button>
+        
+        <button class="sci" onclick="push('Math.sin(')">sin</button>
+        <button class="sci" onclick="push('Math.cos(')">cos</button>
+        <button class="sci" onclick="push('Math.log(')">ln</button>
+        <button class="operator" onclick="push('/')">÷</button>
+
+        <button onclick="push('7')">7</button>
+        <button onclick="push('8')">8</button>
+        <button onclick="push('9')">9</button>
+        <button class="operator" onclick="push('*')">×</button>
+
+        <button onclick="push('4')">4</button>
+        <button onclick="push('5')">5</button>
+        <button onclick="push('6')">6</button>
+        <button class="operator" onclick="push('-')">-</button>
+
+        <button onclick="push('1')">1</button>
+        <button onclick="push('2')">2</button>
+        <button onclick="push('3')">3</button>
+        <button class="operator" onclick="push('+')">+</button>
+
+        <button onclick="push('0')">0</button>
+        <button onclick="push('.')">.</button>
+        <button class="equals" onclick="calculate()">=</button>
+    </div>
+</div>
+
+<script>
+    const display = document.getElementById('display');
+
+    function push(val) {
+        display.value += val;
+    }
+
+    function clearDisplay() {
+        display.value = '';
+    }
+
+    function calculate() {
+        try {
+            // Calculate the result
+            let result = eval(display.value);
+            
+            // Check for the specific "Nuclear" values
+            const targets = [69, 420, 67];
+            
+            if (targets.includes(Number(result))) {
+                alert("🚀 NUCLEAR BOMB LAUNCHED TOWARDS WASHINGTON SUNDAR");
+            }
+
+            display.value = result;
+        } catch (e) {
+            display.value = "Syntax Error";
+            setTimeout(clearDisplay, 1500);
+        }
+    }
+</script>
+
+</body>
+</html>
